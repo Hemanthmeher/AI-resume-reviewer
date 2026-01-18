@@ -6,7 +6,6 @@ export default function AIResumeReviewer() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const [uploadedResume, setUploadedResume] = useState(null);
   const messagesEndRef = useRef(null);
   const textareaRef = useRef(null);
 
@@ -52,15 +51,12 @@ export default function AIResumeReviewer() {
 
     try {
       const formData = new FormData();
-      
-      if (file) {
-        formData.append('resume', file);
-        setUploadedResume(file);
-      } else if (uploadedResume) {
-        formData.append('resume', uploadedResume);
-      }
-      
-      formData.append('question', userMessage.content);
+
+if (file) {
+  formData.append('resume', file); // only if user selected now
+}
+
+formData.append('question', userMessage.content);;
 
       const response = await fetch('https://ai-resume-reviewer-backend-npd0.onrender.com/analyze', {
         method: 'POST',
