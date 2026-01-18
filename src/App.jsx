@@ -52,11 +52,11 @@ export default function AIResumeReviewer() {
     try {
       const formData = new FormData();
 
-if (file) {
-  formData.append('resume', file); // only if user selected now
-}
+      if (file) {
+        formData.append('resume', file);
+      }
 
-formData.append('question', userMessage.content);;
+      formData.append('question', userMessage.content);
 
       const response = await fetch('https://ai-resume-reviewer-backend-npd0.onrender.com/analyze', {
         method: 'POST',
@@ -100,7 +100,6 @@ formData.append('question', userMessage.content);;
     setMessages([]);
     setFile(null);
     setInput('');
-    setUploadedResume(null);
   };
 
   return (
@@ -515,26 +514,6 @@ formData.append('question', userMessage.content);;
                     <X size={14} />
                   </button>
                 </div>
-              </div>
-            )}
-            
-            {/* Resume Status Indicator */}
-            {!file && uploadedResume && (
-              <div style={{
-                marginBottom: '12px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                fontSize: 'clamp(11px, 2.8vw, 12px)',
-                color: '#888'
-              }}>
-                <div style={{
-                  width: '6px',
-                  height: '6px',
-                  backgroundColor: '#10b981',
-                  borderRadius: '50%'
-                }}></div>
-                <span>Resume loaded: {uploadedResume.name}</span>
               </div>
             )}
 
