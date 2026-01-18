@@ -53,13 +53,14 @@ export default function AIResumeReviewer() {
       const formData = new FormData();
 
       if (file) {
-        formData.append('resume', file);
+        formData.append('resume', file, file.name);
       }
 
       formData.append('question', userMessage.content);
 
       const response = await fetch('https://ai-resume-reviewer-backend-npd0.onrender.com/analyze', {
         method: 'POST',
+        mode: 'cors',
         body: formData
       });
 
